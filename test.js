@@ -51,7 +51,7 @@ tape('calls the locking callbacks in a different stack', function (t) {
   })
 
   lock(function (release) {
-    t.ok(secondScopeFinished, 'the last lock\'s call stack is done')
+    t.ok(secondScopeFinished, "the last lock's call stack is done")
     release()
     t.end()
   })

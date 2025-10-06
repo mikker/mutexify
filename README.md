@@ -12,19 +12,18 @@ Hasn't this been done before? Yes, but the specific semantics of this made some 
 
 ## Usage
 
-
-``` js
+```js
 var mutexify = require('mutexify')
 var lock = mutexify()
 
-lock(function(release) {
+lock(function (release) {
   console.log('i am now locked')
-  setTimeout(function() {
+  setTimeout(function () {
     release()
   }, 1000)
 })
 
-lock(function(release) {
+lock(function (release) {
   console.log('1 second later')
   release()
 })
@@ -33,9 +32,9 @@ lock(function(release) {
 A common pattern is to call a callback after you release the lock.
 To do this in a one-liner pass the callback and the value to `release(cb, err, value)`
 
-``` js
-var write = function(data, cb) {
-  lock(function(release) {
+```js
+var write = function (data, cb) {
+  lock(function (release) {
     fs.writeFile('locked-file.txt', data, release.bind(null, cb))
   })
 }

@@ -8,7 +8,9 @@ var mutexifyPromise = function () {
   }
 
   Object.defineProperty(acquire, 'locked', {
-    get: function () { return lock.locked },
+    get: function () {
+      return lock.locked
+    },
     enumerable: true
   })
 
