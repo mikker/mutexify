@@ -7,13 +7,15 @@
     "queue-tick": "^1.0.0"
   },
   "devDependencies": {
-    "standard": "^14.3.3",
+    "prettier": "^3.6.2",
+    "prettier-config-holepunch": "^1.0.0",
     "tape": "^3.0.2"
   },
   "scripts": {
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
     "test": "tape test.js",
-    "posttest": "npm run lint",
-    "lint": "standard"
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
