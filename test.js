@@ -1,8 +1,8 @@
-var tape = require('tape')
+var test = require('brittle')
 var mutexify = require('./')
 var mutexifyPromise = require('./promise')
 
-tape('locks', function (t) {
+test('locks', function (t) {
   t.plan(21)
 
   var lock = mutexify()
@@ -22,13 +22,14 @@ tape('locks', function (t) {
   }
 })
 
-tape('calls callback', function (t) {
+test('calls callback', function (t) {
+  t.plan(2)
+
   var lock = mutexify()
 
   var cb = function (err, value) {
-    t.same(err, null)
-    t.same(value, 'hello world')
-    t.end()
+    t.is(err, null)
+    t.is(value, 'hello world')
   }
 
   lock(function (release) {
@@ -36,7 +37,7 @@ tape('calls callback', function (t) {
   })
 })
 
-tape('calls the locking callbacks in a different stack', function (t) {
+test('calls the locking callbacks in a different stack', function (t) {
   t.plan(2)
 
   var lock = mutexify()
@@ -53,13 +54,12 @@ tape('calls the locking callbacks in a different stack', function (t) {
   lock(function (release) {
     t.ok(secondScopeFinished, "the last lock's call stack is done")
     release()
-    t.end()
   })
 
   topScopeFinished = true
 })
 
-tape('locks with promises', async function (t) {
+test('locks with promises', async function (t) {
   t.plan(21)
 
   var lock = mutexifyPromise()
